@@ -1,14 +1,15 @@
 from flask import Flask
 from flask_script import Manager
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 class Applciation(Flask):
-    # def __init__(self,import_name,template_folder=None,root_path=None,static_folder=None):
-    #     super(Applciation,self).__init__(import_name,template_folder=template_folder,root_path=root_path,static_folder=static_folder)
     def __init__(self,import_name,template_folder=None,root_path=None):
         super(Applciation, self).__init__(import_name,template_folder=template_folder,root_path=root_path,static_folder=None)
+        self.config.from_pyfile('config/base_settings.py')
+        db.init_app(self)
 
-# app = Applciation(__name__,template_folder=os.getcwd()+'/web/templates/',root_path=os.getcwd(),static_folder=os.getcwd()+'/web/static/')
+db = SQLAlchemy()
 app = Applciation(__name__,template_folder=os.getcwd()+'/web/templates/',root_path=os.getcwd())
 manager = Manager(app)
 
