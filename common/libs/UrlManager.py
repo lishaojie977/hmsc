@@ -1,5 +1,4 @@
 import time
-
 class UrlManager(object):
     def __init__(self):
         pass
@@ -11,8 +10,8 @@ class UrlManager(object):
     @staticmethod
     def buildStaticUrl(path):
         ver = "%s"%(int(time.time()))
-        path = "/static" + path + "?version=" + ver
-        return UrlManager.buildUrl(path)
+        path = '/static' + path + '?version=' + ver
+        return path
 
     @staticmethod
     def buildImageUrl(path):

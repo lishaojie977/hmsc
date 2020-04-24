@@ -7,11 +7,12 @@ var common_ops = {
         console.log('common.js')
     },
     buildUrl:function(path,params){
-        var url = "" + path
-        return url
+        var url = '' + path
+        return url;
     }
-}
+
+};
 
 $(document).ready(function(){
     common_ops.init();
-})
+});

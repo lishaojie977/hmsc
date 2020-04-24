@@ -2,8 +2,6 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理后台</title>
     <link rel="stylesheet" href="{{ buildStaticUrl('/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ buildStaticUrl('/css/style.css') }}">
@@ -12,8 +10,9 @@
 <body>
     {% block content %} {% endblock %}
 
+
 <script src="{{ buildStaticUrl('/plugins/jquery-3.5.0.min.js') }}"></script>
 <script src="{{ buildStaticUrl('/js/common.js') }}"></script>
-{% block js%}{% endblock %}
+{% block js %}{% endblock %}
 </body>
 </html>
