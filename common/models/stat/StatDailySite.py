@@ -2,11 +2,7 @@
 from sqlalchemy import Column, Date, DateTime, Integer, Numeric
 from sqlalchemy.schema import FetchedValue
 from flask_sqlalchemy import SQLAlchemy
-
-
-db = SQLAlchemy()
-
-
+from application import db
 
 class StatDailySite(db.Model):
     __tablename__ = 'stat_daily_site'

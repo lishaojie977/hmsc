@@ -7,7 +7,6 @@ route_index = Blueprint("index_page",__name__)
 
 @route_index.route('/')
 def index():
-
     resp_data = {
         'data':{
             'finance':{
