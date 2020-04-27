@@ -40,11 +40,11 @@ def set():
         if uid:
             info = User.query.filter_by(uid=uid).first()
         resp_data['info'] = info
-    return ops_render('account/set.html',resp_data)
+        return ops_render('account/set.html',resp_data)
     # POST  更新数据库
     resp = {
         'code':200,
-        'msg':"操作成功",
+        'msg':"添加成功",
         'data':{}
     }
     # ajax 发送的数据
