@@ -1,7 +1,8 @@
 from flask import Blueprint,request,redirect,jsonify
 
-from application import db
-from common.libs.Helper import ops_render,getCurrentDate
+from application import db,app
+from sqlalchemy import or_
+from common.libs.Helper import ops_render,getCurrentDate,iPagination
 from common.libs.UrlManager import UrlManager
 from common.libs.user.UserService import UserService
 from common.models.User import User
@@ -12,17 +13,36 @@ router_account = Blueprint("account_page",__name__)
 def index():
     resp_data = {}
     req = request.values
+    page = int(req['p']) if ('p' in req and req['p']) else 1
     query = User.query
+
     if 'status' in req and int(req['status']) > -1:
         query = query.filter(User.status == int(req['status']))
 
-    list = query.all()
+    if 'mix_kw' in req:
+        rule = or_( User.nickname.ilike('%{0}%'.format(req['mix_kw'])), User.mobile.ilike('%{0}%'.format(req['mix_kw'])))
+        query = query.filter(rule)
+
+
+    params = {
+        'total':query.count(),
+        'page':page,
+        'page_size':app.config['PAGE_SIZE'],
+        'url':request.full_path.replace('&p={}'.format(page),'')
+    }
+    # 分页的三大关键字
+    pages = iPagination(params)
+    offset = (page-1)*app.config['PAGE_SIZE']
+    limit = app.config['PAGE_SIZE']*page
+
+    list = query.all()[offset:limit]
     resp_data['list'] = list
     resp_data['status'] = {
         '1':'正常',
         '0':'已删除'
     }
-    return ops_render('account/index.html',resp_data)
+    resp_data['pages'] = pages
+    return ops_render('account/index.html', resp_data)
 
 @router_account.route('/info')
 def info():
@@ -119,7 +139,7 @@ def set():
 @router_account.route('removeOrRecover',methods=["GET","POST"])
 def removeOrRecover():
     resp = {
-        'code':-1,
+        'code':200,
         'msg':'操作成功',
         'data':{}
     }
@@ -139,7 +159,7 @@ def removeOrRecover():
             return jsonify(resp)
         if user_info and user_info.uid == 1:
             resp['code'] = -1
-            resp['msg'] = "该用户为Bruce，不能操作账号"
+            resp['msg'] = "该用户为L，不能操作账号"
             return jsonify(resp)
         if acts == "remove":
             user_info.status = 0
