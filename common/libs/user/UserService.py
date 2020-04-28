@@ -24,4 +24,4 @@ class UserService():
     def generateSalt(length=16):
         keyList = [ random.choice(( string.ascii_letters + string.digits )) for i in range(length) ]
 
-        return ("".join(keyList)) 
+        return ("".join(keyList))
