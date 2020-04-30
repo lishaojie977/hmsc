@@ -6,8 +6,6 @@ from application import db
 
 
 
-
-
 class Member(db.Model):
     __tablename__ = 'member'
 

@@ -1,6 +1,6 @@
 from flask import g,render_template
 
-import datetime,math
+import datetime
 
 
 def ops_render(template,context={}):
@@ -16,22 +16,21 @@ def getCurrentDate(format = "%Y-%m-%d %H:%M:%S" ):
 def iPagination(params):
     import math
     ret = {
-        'is_prev':True,
-        'is_next':True,
-        'from':1,
-        'end':0,
-        'current':0,
-        'total_pages':0,
-        'page_size':0,
-        'total':0,
-        'url':params['url']
+        "is_prev":True,
+        "is_next":True,
+        "from":1,
+        "end":0,
+        "current":0,
+        "total_pages":0,
+        "page_size":0,
+        "total":0,
+        "url":params['url']
     }
 
     total = int(params['total'])
-    page_size = int(params['page_size'])
-    page = int(params['page'])
-
-    total_pages = int(math.ceil(total/page_size))
+    page_size = int( params['page_size'] )
+    page = int( params['page'] )
+    total_pages = int( math.ceil(total/page_size))
 
     if page <= 1:
         ret['is_prev'] = False
@@ -44,10 +43,11 @@ def iPagination(params):
     ret['page_size'] = page_size
     ret['end'] = total_pages
 
-    #生成器
-    ret['range'] = range(ret['from'],ret['end']+1)
+    # 生成器
+    ret['range'] = range( ret['from'],ret['end'] + 1 )
 
     return ret
+
 
 # 根据数据库中的某个字段（id），查询出一个dict结果
 def getDictFilterField(db_model,select_filed,key_filed,id_list):
@@ -82,6 +82,3 @@ def selectFilterObj(obj,field):
 
 
 
-
-
-    

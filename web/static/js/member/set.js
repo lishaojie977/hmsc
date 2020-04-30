@@ -45,4 +45,4 @@ var member_set_ops = {
 }
 $(document).ready(function () {
     member_set_ops.init();
-}); 
+});

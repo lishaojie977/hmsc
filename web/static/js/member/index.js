@@ -41,4 +41,4 @@ var member_index_ops = {
 
 $(document).ready(function(){
     member_index_ops.init()
-}) 
+})

@@ -9,30 +9,36 @@ var account_index_ops = {
             $(".wrap_search").submit()
         })
         $(".remove").click(function(){
-            id = $(this).attr("data")
-            that.myAjax(id,'remove')
-        })  
+            id = $(this).attr("data") 
+            that.myAjax(id,"remove")
+        })
         $(".recover").click(function(){
             id = $(this).attr("data")
-            that.myAjax(id,'recover')
+            that.myAjax(id,"recover")
         })
     },
     myAjax:function(id,acts){
         $.ajax({
-            url:common_ops.buildUrl( "/account/removeOrRecover" ),
-            type:'POST',
-            data:{"id":id,"acts":acts},
-            dataType:'json',
-            success:function( res ){
-                if( res.code == 200 ){
-                    window.location.href = common_ops.buildUrl("/account/index");
+            url:common_ops.buildUrl("/account/removeOrRecover"),
+            type:"POST",
+            data:{
+                "id":id,
+                "acts":acts
+            },
+            dataType:"json",
+            success:function(resp){
+                console.log(resp.msg)
+                if (resp.code == 200) {
+                    window.location.href = common_ops.buildUrl("/account/index")
                 }
-                alert( res.msg );
+            },
+            error:function(error){
+                console.log(error)
             }
-        });
+        })
     }
 }
 
 $(document).ready(function(){
     account_index_ops.init()
-}) 
+})
