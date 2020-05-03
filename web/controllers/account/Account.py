@@ -124,7 +124,7 @@ def set():
     model_user.login_name = login_name
     if user_info and user_info.uid == 1:
         resp['code'] = -1
-        resp['msg'] = "该用户为Bruce，不允许修改"
+        resp['msg'] = "该用户为L，不允许修改"
         return jsonify(resp)
     model_user.login_pwd = UserService.generatePwd(login_pwd,model_user.login_salt)
     model_user.updated_time = getCurrentDate()
@@ -160,7 +160,7 @@ def removeOrRecover():
         return jsonify(resp)
     if user_info and user_info.uid == 1:
         resp['code'] = -1
-        resp['msg'] = "该用户为Bruce，不能操作账号"
+        resp['msg'] = "该用户为L，不允许修改"
         return jsonify(resp)
     if acts == "remove":
         user_info.status = 0
